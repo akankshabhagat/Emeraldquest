@@ -1,8 +1,17 @@
-import Image from "next/image";
 
-export default function Home() {
+import Navbar from './components/Containermain';
+import Containermain from './components/Containermain';
+import Emerald from './components/emerald';
+
+export default function Page() {
   return (
-    <h1 className="italic md:font-normal text-3xl">Hello world</h1>
+    <main className="min-h-screen flex flex-col items-center dark:bg-black p-4 border-dashed px-10 py-5 gap-6">     
+    
 
+      <Containermain />
+
+
+    </main>
   );
 }
+

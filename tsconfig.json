@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(roots)/forms/route.js", "src/app/components/paragraph.jsx", "src/app/components/Threedobj.jsx"],
   "exclude": ["node_modules"]
 }
