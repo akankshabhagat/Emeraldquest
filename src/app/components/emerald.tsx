@@ -9,7 +9,7 @@ const Emerald: React.FC = () => {
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Create Scene
+
     const scene = new THREE.Scene();
 
 
@@ -18,15 +18,14 @@ const Emerald: React.FC = () => {
     
     camera.position.z = 17; 
 
-    // Create Renderer (Transparent Background)
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(400, 400);
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping; // Improved brightness
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; 
     renderer.toneMappingExposure = 1.5;
     mountRef.current.appendChild(renderer.domElement);
 
-    // Lighting Setup
+    
     const ambientLight = new THREE.AmbientLight(0xffffff, 6);
     scene.add(ambientLight);
 
@@ -38,7 +37,7 @@ const Emerald: React.FC = () => {
     directionalLight.position.set(-5, 5, 5);
     scene.add(directionalLight);
 
-    // Create Octahedron (Fixed Size)
+    
     const geometry = new THREE.OctahedronGeometry(6);
     // const material = new THREE.MeshStandardMaterial({
     //   color: 0x16C47F,
@@ -46,12 +45,12 @@ const Emerald: React.FC = () => {
     //   roughness: 0.2,
     // });
     const material = new THREE.MeshPhysicalMaterial({
-      color: 0x50C878, // Emerald Green
-      metalness: 1, // Fully metallic for reflections
-      roughness: 3, // Perfectly smooth surface
-      clearcoat: 1, // Adds an extra reflective layer
-      clearcoatRoughness: 0, // No roughness for maximum shine
-      reflectivity: 1, // Full reflection
+      color: 0x50C878, 
+      metalness: 1, 
+      roughness: 3, 
+      clearcoat: 1, 
+      clearcoatRoughness: 0, 
+      reflectivity: 1, 
     });
     const octahedron = new THREE.Mesh(geometry, material);
     scene.add(octahedron);
