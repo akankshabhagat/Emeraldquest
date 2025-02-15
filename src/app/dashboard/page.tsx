@@ -81,7 +81,7 @@ const ProfilePage = () => {
 
         {/* Right Content Area */}
         <div className="col-span-7 p-6 rounded-lg">
-        <h1 className="text-4xl font-bold">{`Hi there! I'm ${formData.name} 👋`}</h1>
+        <h1 className="text-4xl font-bold">{formData.name} </h1>
           <p className="mt-2 text-lg">🌍 <strong>{formData.country}</strong>, {formData.city}</p>
           <p className="mt-2 text-lg">🎓 {formData.degree}</p>
           <p className="mt-2 text-lg">📝 IELTS: {formData.ielts} | PTE: {formData.pte} | TOEFL: {formData.toefl}</p>
