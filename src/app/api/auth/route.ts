@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: "Invalid API endpoint" }, { status: 400 });
   } catch (error) {
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 }

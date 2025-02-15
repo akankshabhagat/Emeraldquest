@@ -7,25 +7,26 @@ const Emerald: React.FC = () => {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!mountRef.current) return;
+    const mount = mountRef.current;
+    if (!mount) return; // Store the reference in a variable and ensure it's not null
 
-
+    // Initialize scene
     const scene = new THREE.Scene();
 
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, 800 / 600, 1, 100);
+    camera.position.z = 17;
 
-    // const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const camera = new THREE.PerspectiveCamera(45, 800/600, 1, 100);
-    
-    camera.position.z = 17; 
-
+    // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(400, 400);
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping; 
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.5;
-    mountRef.current.appendChild(renderer.domElement);
 
-    
+    mount.appendChild(renderer.domElement); // Append renderer to the stored mount reference
+
+    // Lighting setup
     const ambientLight = new THREE.AmbientLight(0xffffff, 6);
     scene.add(ambientLight);
 
@@ -37,25 +38,21 @@ const Emerald: React.FC = () => {
     directionalLight.position.set(-5, 5, 5);
     scene.add(directionalLight);
 
-    
+    // Geometry and Material setup
     const geometry = new THREE.OctahedronGeometry(6);
-    // const material = new THREE.MeshStandardMaterial({
-    //   color: 0x16C47F,
-    //   metalness: 0.1,
-    //   roughness: 0.2,
-    // });
     const material = new THREE.MeshPhysicalMaterial({
-      color: 0x50C878, 
-      metalness: 1, 
-      roughness: 3, 
-      clearcoat: 1, 
-      clearcoatRoughness: 0, 
-      reflectivity: 1, 
+      color: 0x50c878,
+      metalness: 1,
+      roughness: 3,
+      clearcoat: 1,
+      clearcoatRoughness: 0,
+      reflectivity: 1,
     });
+
     const octahedron = new THREE.Mesh(geometry, material);
     scene.add(octahedron);
 
-    // Animation Loop
+    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
       octahedron.rotation.x += 0.005;
@@ -64,9 +61,10 @@ const Emerald: React.FC = () => {
     };
     animate();
 
-    // Cleanup
     return () => {
-      mountRef.current?.removeChild(renderer.domElement);
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement);
+      }
       renderer.dispose();
     };
   }, []);
