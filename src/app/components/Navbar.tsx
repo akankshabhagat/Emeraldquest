@@ -9,43 +9,39 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
- 
   useEffect(() => {
     const checkAuth = () => setIsLoggedIn(!!localStorage.getItem("token"));
-
     checkAuth();
     window.addEventListener("authChange", checkAuth);
-
     return () => window.removeEventListener("authChange", checkAuth);
   }, []);
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    window.dispatchEvent(new Event("authChange")); 
-    router.push("/auth"); 
+    window.dispatchEvent(new Event("authChange"));
+    router.push("/auth");
   };
 
   return (
-    <nav className="container  mx-auto max-w-4xl flex justify-between items-center p-4 dark:bg-black  dark:text-white">
-      <a href="/" className="text-4xl font-bold italic">
-       EmeraldQuest
-      </a>
+    <nav className="container mx-auto max-w-4xl flex justify-between items-center p-4 dark:bg-black dark:text-white">
+      {/* Logo */}
+      <Link href="/" className="text-4xl font-bold italic">
+        EmeraldQuest
+      </Link>
 
+      {/* Desktop Navigation */}
       <div className="hidden md:flex space-x-4">
-        <a href="/" className="hover:text-emerald-400 p-2 font-bold italic text-2xl">
+        <Link href="/" className="hover:text-emerald-400 p-2 font-bold italic text-2xl">
           Home
-        </a>
+        </Link>
 
-       
         {isLoggedIn && (
-          <a href="/dashboard" className="hover:text-emerald-400 p-2 font-bold italic text-2xl">
+          <Link href="/dashboard" className="hover:text-emerald-400 p-2 font-bold italic text-2xl">
             Dashboard
-          </a>
+          </Link>
         )}
 
-      
         {!isLoggedIn ? (
           <Link href="/auth" className="hover:text-emerald-400 font-bold p-2 italic text-2xl">
             Login
@@ -57,27 +53,24 @@ export default function Navbar() {
         )}
       </div>
 
-     
+      {/* Mobile Menu Toggle */}
       <button className="md:hidden text-3xl" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FiX /> : <FiMenu />}
       </button>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="absolute top-16 right-4 bg-white border border-gray-300 shadow-lg rounded-lg p-4 flex flex-col space-y-3 md:hidden">
-          <a href="/" className="hover:text-emerald-400 font-bold italic text-xl" onClick={() => setMenuOpen(false)}>
+          <Link href="/" className="hover:text-emerald-400 font-bold italic text-xl" onClick={() => setMenuOpen(false)}>
             Home
-          </a>
+          </Link>
 
-       
           {isLoggedIn && (
-            <a href="/dashboard" className="hover:text-emerald-400 font-bold italic text-xl" onClick={() => setMenuOpen(false)}>
+            <Link href="/dashboard" className="hover:text-emerald-400 font-bold italic text-xl" onClick={() => setMenuOpen(false)}>
               Dashboard
-            </a>
+            </Link>
           )}
 
-        
-
-         
           {!isLoggedIn ? (
             <Link href="/auth" className="hover:text-emerald-400 font-bold italic text-xl" onClick={() => setMenuOpen(false)}>
               Login

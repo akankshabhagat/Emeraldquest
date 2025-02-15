@@ -36,11 +36,10 @@ export default function AuthForm() {
 
       setMessage(data.message);
 
-      // ✅ Store token & update Navbar state
       if (isLogin) {
-        localStorage.setItem("token", data.token);  // Save token in localStorage
-        window.dispatchEvent(new Event("authChange"));  // 🔥 Trigger Navbar update
-        router.push("/dashboard");  // Redirect to Dashboard
+        localStorage.setItem("token", data.token);  
+        window.dispatchEvent(new Event("authChange")); 
+        router.push("/dashboard");  
       }
     } catch (error: any) {
       setMessage(error.message);
