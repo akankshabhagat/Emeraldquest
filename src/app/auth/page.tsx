@@ -41,15 +41,19 @@ export default function AuthForm() {
         window.dispatchEvent(new Event("authChange")); 
         router.push("/dashboard");  
       }
-    } catch (error: any) {
-      setMessage(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center  ">
+    <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="p-8 shadow-lg rounded-2xl w-full max-w-md text-white border border-dashed cardform">
         <h1 className="text-2xl font-semibold text-center">{isLogin ? "Login" : "Sign Up"}</h1>
 
